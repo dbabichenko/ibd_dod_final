@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form id="patient-data" method="POST">
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Demographic/social information</header>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-employed" name="isEmployed">
+                <label class="form-check-label" for="is-employed">
+                    Is the patient employed?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-partnered" name="isPartnered">
+                <label class="form-check-label" for="is-partnered">
+                    Does the patient have a spouse or significant other?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-50-plus" name="is50Plus">
+                <label class="form-check-label" for="is-50-plus">
+                    Is the patient 50 years of age or older?
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Health behaviors</header>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-tobacco-user" name="isTobaccoUser">
+                <label class="form-check-label" for="is-tobacco-user">
+                    Has the patient <strong>ever</strong> used tobacco?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-alcohol-user" name="isAlcoholUser">
+                <label class="form-check-label" for="is-alcohol-user">
+                    Does the patient currently drink alcohol?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-psychological-patient"
+                    name="isPsychologicalPatient">
+                <label class="form-check-label" for="is-psychological-patient">
+                    Does the patient have any relevant psychological comorbidities?
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Healthcare encounters</header>
+            <div class="form-group">
+                <label for="avgAnnualHospitalizations">
+                    <strong>In the past three years,</strong>
+                    how many hospitalizations has the patient had each year on average?
+                </label>
+                <input type="number" id="avgAnnualHospitalizations" class="form-control" aria-valuemin="0"
+                    name="avgAnnualHospitalizations" value="0">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-er-admitted" name="isERAdmitted">
+                <label class="form-check-label" for="is-er-admitted">
+                    <strong>In the last year,</strong>
+                    has the patient been admitted to an ER?
+                </label>
+            </div>
+            <div class="form-group">
+                <select id="no-phone-calls" name="noPhoneCalls" class="form-select form-select-sm"
+                    aria-label="Number of patient phone calls">
+                    <option value="0" selected>0</option>
+                    <option value="1-10">1-10</option>
+                    <option value="11+">11+</option>
+                </select>
+                <label for="no-phone-calls">
+                    <strong>In the past year,</strong>
+                    how many phone calls has the patient had?
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Prescriptions</header>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isPrescribedImmunoModulators"
+                    name="isPrescribedImmunoModulators">
+                <label class="form-check-label" for="isPrescribedImmunoModulators">
+                    <strong>In the past year</strong>, has the patient received immunomodulators?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isPrescribedNarcotics" name="isPrescribedNarcotics">
+                <label class="form-check-label" for="isPrescribedNarcotics">
+                    <strong>In the past 3 years</strong>, has the patient received narcotics?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isPrescribedSteroids" name="isPrescribedSteroids">
+                <label class="form-check-label" for="isPrescribedSteroids">
+                    <strong>In the past year</strong>, has the patient received systemic steroids?
+                </label>
+            </div>
+            <div class="form-group">
+                <select id="no-steroids-years" name="noSteroidsYears" class="form-select form-select-sm"
+                    aria-label="Number of years prescribed systemic steroids">
+                    <option value="0" selected>0</option>
+                    <option value="1-2">1-2</option>
+                    <option value="3">3</option>
+                </select>
+                <label class="form-check-label" for="noSteroidsYears">
+                    <strong>Of the past 3 years</strong>, in how many was the patient prescribed systemic steroids?
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Lab results (last three years)</header>
+            <small class="form-text text-muted">
+                If you don't have info for the patient's labs, that's okay -- we can generate stronger predictions when
+                we know this information, but it's not required.
+            </small>
+
+            <div class="form-group">
+                <select id="no-lab-hemoglobin-years" name="noLabHemoglobinYears" class="form-select form-select-sm"
+                    aria-label="Number of years with abnormal hemoglobin test">
+                    <option value="" selected>Unknown</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label class="form-check-label" for="noLabHemoglobinYears">
+                    <strong>In the past 3 years</strong>, in how many did the patient have an abnormal hemoglobin value?
+                </label>
+            </div>
+            <div class="form-group">
+                <select id="no-lab-eos-years" name="noLabEosYears" class="form-select form-select-sm"
+                    aria-label="Number of years with abnormal hemoglobin test">
+                    <option value="" selected>Unknown</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label class="form-check-label" for="noLabEosYears">
+                    <strong>In the past 3 years</strong>, in how many did the patient have an abnormal EOS blood test?
+                </label>
+            </div>
+            <div class="form-group">
+                <select id="no-lab-monocytes-years" name="noLabMonocytesYears" class="form-select form-select-sm"
+                    aria-label="Number of years with abnormal hemoglobin test">
+                    <option value="" selected>Unknown</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label class="form-check-label" for="noLabMonocytesYears">
+                    <strong>In the past 3 years</strong>, in how many did the patient have abnormal monocytes values?
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="noAbnormalMonocytes">
+                    <strong>In the past 3 years</strong>, how many total abnormal monocytes results did the patient
+                    have?
+                </label>
+                <input type="number" id="noAbnormalMonocytes" class="form-control" aria-valuemin="0" aria-valuemax="3"
+                    min="0" max="3" name="noAbnormalMonocytes" value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <header class="form-section-label">Lab results (current year)</header>
+            <small class="form-text text-muted">
+                This information isn't required, but can allow us to make more accurate predictions in some cases.
+
+                Check all tests for which the patient has an abnormal result <strong>in the current year</strong>.
+            </small>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-current-year-abnormal-albumin"
+                    name="isCurrentYearAbnormalAlbumin">
+                <label class="form-check-label" for="isCurrentYearAbnormalAlbumin">
+                    Albumin
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-current-year-abnormal-eos"
+                    name="isCurrentYearAbnormalEos">
+                <label class="form-check-label" for="isCurrentYearAbnormalEos">
+                    EOS
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-current-year-abnormal-hemoglobin"
+                    name="isCurrentYearAbnormalHemoglobin">
+                <label class="form-check-label" for="isCurrentYearAbnormalHemoglobin">
+                    Hemoglobin
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="is-current-year-abnormal-monocytes"
+                    name="isCurrentYearAbnormalMonocytes">
+                <label class="form-check-label" for="isCurrentYearAbnormalMonocytes">
+                    Monocytes
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row predict-button">
+        <div class="col">
+            <button id="btn-predict" class="btn btn-primary btn-lg">Predict</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

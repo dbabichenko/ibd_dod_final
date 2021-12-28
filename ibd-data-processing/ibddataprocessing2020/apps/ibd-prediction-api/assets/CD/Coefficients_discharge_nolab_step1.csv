@@ -1,0 +1,2 @@
+"(Intercept)","unemployed","notMarried","Discharge.Summary_ave3","ER.Report_bin","alcohol2yes","Immunomodulators_bin3","narcotics_bin3","psyche","unemployed:psyche"
+-3.74912338528522,-0.147885448501093,0.581990750957463,0.614940373966564,1.05914582667464,-0.398882088176258,-0.365988000167449,0.40550942850638,-0.229764325604922,1.25787083361216

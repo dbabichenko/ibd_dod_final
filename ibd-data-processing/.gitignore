@@ -1,0 +1,9 @@
+.vscode
+__pycache__
+ibddataprocessing2020/scripts/openemr-import/data
+ibddataprocessing2020/scripts/generate-biostats-model/assets
+ibddataprocessing2020/scripts/preprocess/data
+ibddataprocessing2020/scripts/raw-data-deidentify/data
+ibddataprocessing2020/scripts/raw-data-deidentify/out/*.csv
+ibddataprocessing2020/scripts/preprocess/output/*.csv
+.ipynb_checkpoints

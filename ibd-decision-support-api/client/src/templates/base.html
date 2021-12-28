@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block styles %}
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+
+    <title>IBD Outcomes Predictor (Single Patient)</title>
+    {% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">IBD Outcomes Predictor</h1>
+            <p class="lead">Predicting the likelihood of clinical outcomes for a single IBD patient</p>
+            <hr class="my-4">
+            Choose the patient's diagnosis and enter their information below to see a prediction of their clinical
+            outcomes over the next year.
+        </div>
+
+        {% from 'bootstrap/nav.html' import render_nav_item %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-nav mr-auto">
+                {{ render_nav_item('diagnosis_uc', 'Ulcerative Colitis Patients') }}
+                {{ render_nav_item('diagnosis_cd', 'Crohn\'s Disease Patients') }}
+            </div>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+        {% if predictions is defined %}
+        <div id="prediction" class="prediction">
+            <div class="h5">Generated prediction</div>
+
+            Based on these attributes, this patient has:
+
+            <ul>
+                <li>A <strong>{{'%0.2f'| format(predictions['discharge']['phat'] | float * 100)}}%</strong> likelihood
+                    to be hospitalized
+                    more than once in the next year</li>
+                <li>A <strong>{{'%0.2f'| format(predictions['charge']['phat'] | float * 100)}}%</strong> likelihood to
+                    experience charges of greater than $100k in the next year</li>
+                <li>A <strong>{{'%0.2f'| format(predictions['steroids']['phat'] | float * 100)}}%</strong> likelihood to
+                    be prescribed systemic steroids in the next year</li>
+            </ul>
+        </div>
+        {% block prediction %}{% endblock %}
+        {% endif %}
+    </div>
+
+    {% block scripts %}
+    {{ bootstrap.load_js() }}
+    <script src="/static/main.js"></script>
+    {% endblock %}
+</body>
+
+</html>

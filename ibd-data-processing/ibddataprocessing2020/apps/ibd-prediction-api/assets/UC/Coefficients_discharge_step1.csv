@@ -1,0 +1,2 @@
+"(Intercept)","age","duration_cat(5,25]","duration_cat(25, Inf]","Discharge.Summary_bin","ER.Report_bin","Telephone_cat[10, Inf]","narcotics_bin3","Immunomodulators_bin3","hemoglobin_bin3","age:duration_cat(5,25]","age:duration_cat(25, Inf]","Discharge.Summary_bin:ER.Report_bin"
+-2.32608368834098,-0.0387417530331284,-1.45557790317688,-4.83595341710238,1.44973227533207,1.03361095723011,0.761648553878807,0.352781447298111,-0.348151947771016,0.700778595136272,0.0226899630825666,0.0840611383501178,-1.01084907808315

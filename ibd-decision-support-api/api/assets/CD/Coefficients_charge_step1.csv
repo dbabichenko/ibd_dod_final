@@ -1,0 +1,2 @@
+"(Intercept)","unemployed","tobaccoEver","Discharge.Summary_ave3","ER.Report_bin","Immunomodulators_bin","narcotics_bin3","Systemic_steroids_bin","hemoglobin_fyears_cat(0,2]","hemoglobin_fyears_cat(2,3]","eos_bin3","monocytes_ave3","Immunomodulators_bin:narcotics_bin3","narcotics_bin3:Systemic_steroids_bin"
+-3.78738026323629,0.463517383604489,0.2855966966194,0.342755043697527,0.787600986765239,-1.22726284631231,-0.00266849711119166,0.891666312846855,0.496837265681104,0.517248637586874,-0.292948001900551,0.112437201536356,1.17388252760523,-0.917382699380775

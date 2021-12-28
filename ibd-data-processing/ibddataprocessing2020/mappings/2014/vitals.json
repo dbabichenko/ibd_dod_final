@@ -1,0 +1,14 @@
+{
+  "FILENAME" : "IBD_Reg_Pts_Vitals_BP_Ht_Wt_2014-03-04.csv",
+  "MRN" : 0,
+  "ENCOUNTER_TYPE" : 1,
+  "CONTACT_DATE" : 2,
+  "BMI" : 3,
+  "HEIGHT" : 4,
+  "WEIGHT" : 5,
+  "PULSE" : 6,
+  "RESPIRATIONS" : 7,
+  "BP_RECORDED_DATE_TIME" : 8,
+  "BP" : 9,
+  "BP_POSITION" : 10
+}

@@ -1,0 +1,17 @@
+{
+  "FILENAME" : "2015-02-24 IBD type-location.csv",
+  "MRN" : 0,
+  "YEAR_DIAGNOSIS" : 1,
+  "DSTYPE" : 2,
+  "L1" : 3,
+  "L2" : 4,
+  "L3" : 5,
+  "L4" : 6,
+  "B1" : 7,
+  "B2" : 8,
+  "B3" : 9,
+  "P" : 10,
+  "E1" : 11,
+  "E2" : 12,
+  "E3" : 13
+}

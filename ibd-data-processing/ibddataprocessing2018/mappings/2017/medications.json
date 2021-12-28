@@ -1,0 +1,17 @@
+{
+  "FILENAME" : "IBD Reg Pts Medications_2017-01-19.csv",
+  "MRN" : 0,
+  "PAT_STATUS" : 1,
+  "ORDER_ID" : 2,
+  "MED_ID" : 3,
+  "MED_NAME" : 4,
+  "SIMPLE_GENERIC_NAME" : 5,
+  "ORDERING_DATE" : 6,
+  "START_DATE" : 7,
+  "END_DATE" : 8,
+  "THERAPEUTIC_CLASS" : 9,
+  "PHARM_CLASS" : 10,
+  "PHARM_SUB_CLASS" : 11,
+  "DESCRIPTION" : 12,
+  "SIG" : 13
+}

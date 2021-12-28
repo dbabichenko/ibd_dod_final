@@ -1,0 +1,11 @@
+{
+  "FILENAME" : "IBD Reg Pts w ER_OP_DC Reports_2015-01-16.csv",
+  "MRN" : 0,
+  "ENC_TYPE_C" : 1,
+  "ENC_TYPE_NAME" : 2,
+  "CONTACT_DATE" : 3,
+  "DEPT_ID" : 4,
+  "DEPT_NAME" : 5,
+  "VISIT_PROV_ID" : 6,
+  "VISIT_PROV_NAME" : 7
+}

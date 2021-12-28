@@ -1,0 +1,47 @@
+nav {
+    display: block;
+    margin: 0.5rem 0 1rem;
+}
+
+.jumbotron {
+    margin-bottom: 1rem;
+}
+
+header.form-section-label {
+    padding-bottom: 0.3rem;
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    border-bottom: solid 1px #aaa;
+}
+
+input[type=radio] {
+    margin-left: 1rem;
+}
+
+form {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+small.form-text.text-muted {
+    margin-bottom: 1rem;
+}
+
+label.unknown-label {
+    padding-right: 1rem;
+    border-right: solid 1px #bbbbbb;
+}
+
+.predict-button {
+    margin-top: 2rem;
+}
+
+#prediction {
+    margin: 2rem 0;
+    background-color: #e9ecef;
+    padding: 1rem;
+}
+
+#prediction h6 {
+    margin-bottom: 1rem;
+}

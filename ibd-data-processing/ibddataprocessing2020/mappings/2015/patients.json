@@ -1,0 +1,10 @@
+{
+  "FILENAME" : "IBD_Registry_Participant_List_2015-01-16.csv",
+  "MRN" : 0,
+  "GENDER" : 1,
+  "BIRTH_DATE" : 2,
+  "PATIENT_STATUS" : 3,
+  "RACE" : 4,
+  "ETHNIC_GROUP" : 5,
+  "EMPLOYMENT_STATUS" : 6
+}

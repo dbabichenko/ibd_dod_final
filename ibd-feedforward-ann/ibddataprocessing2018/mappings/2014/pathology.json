@@ -1,0 +1,11 @@
+{
+  "FILENAME" : "IBD_Reg_Pts_Pathology_2014-03-04.csv",
+  "MRN" : 0,
+  "ORDER_DATE" : 1,
+  "PROC_CODE" : 2,
+  "PROC_NAME" : 3,
+  "ORDER_STATUS" : 4,
+  "CPT_CODE" : 5,
+  "RESULT_DATE" : 6,
+  "NARRATIVE" : 7
+}

@@ -1,0 +1,13 @@
+{
+  "FILENAME" : "CARE_BINION_1679_PROC_DATA_03_03_2015.csv",
+  "MRN" : 0,
+  "ORIG_SERVICE_DATE" : 1,
+  "AMOUNT" : 2,
+  "DX" : 3,
+  "PROC_CODE" : 4,
+  "PROC_NAME" : 5,
+  "CATEGORY" : 6,
+  "TYPE_OF_SERVICE" : 7,
+  "PROC_GROUP_NAME" : 8,
+  "COMPONENTS" : 9
+}

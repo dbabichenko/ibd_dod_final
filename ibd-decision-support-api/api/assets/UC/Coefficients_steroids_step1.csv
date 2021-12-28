@@ -1,0 +1,2 @@
+(Intercept),"Systemic_steroids_years_cat(0,1]","Systemic_steroids_years_cat(1,2]","Systemic_steroids_years_cat(2,3]",Discharge.Summary_bin3,"Office.Visit_cat(1, Inf]","Telephone_cat(1,10]","Telephone_cat(10, Inf]",eos_bin3
+-2.522571043,0.899745234,1.812199633,2.835029415,-0.331385605,0.251374451,0.358025534,0.645543697,0.237306084

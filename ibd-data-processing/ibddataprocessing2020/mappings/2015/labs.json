@@ -1,0 +1,19 @@
+{
+  "FILENAME" : "IBD_Reg_Pts_w_Labs_2015-03-03_2.csv",
+  "MRN" : 0,
+  "ORDER_DATE" : 1,
+  "PROC_CODE" : 2,
+  "PROC_NAME" : 3,
+  "ORDER_STATUS" : 4,
+  "CPT_CODE" : 5,
+  "LAB_COMP_ID" : 6,
+  "LAB_COMP_NAME" : 7,
+  "RESULT_DATE" : 8,
+  "ORD_VALUE" : 9,
+  "ORD_NUM_VALUE" : 10,
+  "REF_LOW" : 11,
+  "REF_HIGH" : 12,
+  "REF_NORMAL_VALS" : 13,
+  "REF_UNIT" : 14,
+  "RESULT_FLAG" : 15
+}

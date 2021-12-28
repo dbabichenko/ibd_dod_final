@@ -1,0 +1,19 @@
+{
+  "FILENAME" : "IBD_Pts_w_Rad_Diagnostic_Tests_2017-01-23.csv",
+  "MRN" : 0,
+  "VISIT_DATE" : 1,
+  "ORDERING_DATE" : 2,
+  "CPT_CODE" : 3,
+  "DESCRIPTION" : 4,
+  "QUANTITY" : 5,
+  "PROC_START_DATE" : 6,
+  "PAT_STATUS" : 7,
+  "PROC_CAT_NAME" : 8,
+  "ORDER_TYPE" : 9,
+  "ORDER_CLASS" : 10,
+  "ORDER_STATUS" : 11,
+  "UPDATE_DATE" : 12,
+  "AUTH_PROV_NAME" : 13,
+  "RESULT_DATE" : 14,
+  "REVIEW_DATE" : 15
+}

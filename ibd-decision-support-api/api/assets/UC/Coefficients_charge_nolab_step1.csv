@@ -1,0 +1,2 @@
+"(Intercept)","unemployed","tobaccoEver","family_hx","colectomy_bin3","ER.Report_bin","Office.Visit_cat(1, Inf]","Telephone_cat[10, Inf]","colectomy_bin3:ER.Report_bin"
+-3.84331809503358,0.0937909876769365,0.304331217471548,0.4506582189253,1.57942353918173,0.639554833916269,0.775288811503881,0.826503702104989,-1.68215551121399

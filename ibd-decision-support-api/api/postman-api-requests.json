@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "76df164c-d365-4289-87dd-d0de49abee4d",
+		"name": "IBD Prediction API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello, world!",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Predict - UC, single patient no labs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"diagnosis\": \"uc\",\r\n    \"patientData\": [\r\n        0, \r\n        1, \r\n        0, \r\n        0, \r\n        1, \r\n        0, \r\n        0, \r\n        0, \r\n        0, \r\n        0.33333, \r\n        0,\r\n        0,\r\n        0,\r\n        0,\r\n        1, \r\n        0, \r\n        0, \r\n        0, \r\n        0, \r\n        0,\r\n        0,\r\n        0,\r\n        0,\r\n        0\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/predict",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get patient file format",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/predict",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

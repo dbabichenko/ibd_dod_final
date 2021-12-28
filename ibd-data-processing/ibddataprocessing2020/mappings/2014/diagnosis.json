@@ -1,0 +1,14 @@
+{
+  "FILENAME" : "IBD_Reg_Pts_w_Problem_List_2014-06-11.csv",
+  "MRN" : 0,
+  "DATE_OF_ENTRY" : 1,
+  "NOTED_DATE" : 2,
+  "RESOLVED_DATE" : 3,
+  "UPDATE_DATE" : 4,
+  "DESCRIPTION" : 5,
+  "DIAGNOSIS CODE" : 6,
+  "DX_NAME" : 7,
+  "CLASS OF PROBLEM" : 8,
+  "PROBLEM_STATUS" : 9,
+  "PRIORITY" : 10
+}

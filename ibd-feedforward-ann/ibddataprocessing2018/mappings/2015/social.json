@@ -1,0 +1,20 @@
+{
+  "FILENAME" : "IBD_Reg_Pts_Social_Hx_2015-01-16.csv",
+  "MRN" : 0,
+  "CONTACT_DATE" : 1,
+  "TOBACCO_USER" : 2,
+  "SMOKING_TOB_USE" : 3,
+  "SMOKELESS_TOB_USE" : 4,
+  "TOBACCO_PAK_PER_DY" : 5,
+  "TOBACCO_USED_YEARS" : 6,
+  "TOBACCO_COMMENT" : 7,
+  "SMOKING_QUIT_DATE" : 8,
+  "CIGARETTES_YN" : 9,
+  "PIPES_YN" : 10,
+  "CIGARS_YN" : 11,
+  "SNUFF_YN" : 12,
+  "CHEW_YN" : 13,
+  "ALCOHOL_USE" : 14,
+  "ALCOHOL_OZ_PER_WK" : 15,
+  "ALCOHOL_COMMENT" : 16
+}
