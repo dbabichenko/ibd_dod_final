@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>IBD Risk</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/small-business.css" rel="stylesheet">
+
+  <style>
+    #overlay {
+      width: 100%;
+      background: url('ajax-loader.gif') repeat;
+      position: relative;
+    }
+
+    #overlay img.loading_circle {
+      position: absolute;
+      top: 50%;
+      left: 43%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script type="text/javascript">
+    var dataarray = [];
+    
+    
+    function alldigits(cells) {
+      res = true;
+      for (var j = 0; j < cells.length; j++) {
+        if (cells[j].trim().match(/[^$.\d]/)) {
+          res = false;
+          break;
+        }
+      }
+      return res;
+    }
+    function roundUp(num, precision) {
+      precision = Math.pow(10, precision)
+      return Math.ceil(num * precision) / precision
+    }
+    function Upload() {
+      var fileUpload = document.getElementById("fileUpload");
+      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+      if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+
+            var table = document.createElement("table");
+            var rows = e.target.result.split("\n");
+
+            var fixedrowlength = rows[0].split(",").length;
+            var invalidrows = 0;
+
+            if (fixedrowlength > 20 && fixedrowlength < 33) {
+              var maxrows = rows.length;
+              if (maxrows > rows.length) { maxrows = rows.length; }
+
+              for (var i = 0; i < maxrows; i++) {
+                var rowarray = [];
+                var cells = rows[i].split(",");
+                if (cells.length == fixedrowlength && alldigits(cells)) {
+                  if (i < 5) {
+                    var row = table.insertRow(-1);
+                  }
+
+                  for (var j = 0; j < cells.length; j++) {
+                    rowarray.push(Number(  cells[j]   ));
+                    if (i < 5) {
+                      var cell = row.insertCell(-1);
+                      cell.innerHTML = roundUp(cells[j],2);
+                    }
+
+                  }
+                  dataarray.push(rowarray);
+   
+                } else {
+                  invalidrows++;
+                }
+
+              }
+              if (invalidrows > 0) {
+                alert("Total number of " + invalidrows + " rows contain(s) invalid number of columns or Non-digit Values.");
+              }
+              var dvCSV = document.getElementById("dvCSV");
+              dvCSV.innerHTML = "";
+              dvCSV.appendChild(table);
+              document.getElementById("predict").disabled = false;
+              $("table").addClass("table");
+              $("#preview").show();
+              //console.log(dataarray);
+
+            } else {
+              alert("A valid file must contains between 20 to 33 columns.");
+            }
+          }
+          reader.readAsText(fileUpload.files[0]);
+        } else {
+          alert("This browser does not support HTML5.");
+        }
+      } else {
+        alert("Please upload a valid CSV file.");
+      }
+    }
+
+    function getresults() {
+
+
+      $("#Chart1").hide();
+      $("#result_text").text("Loading... ");
+      $('#results').show();
+      $('#result').html('<div id="overlay"><img src="ajax-loader.gif" class="loading_circle" alt="loading" /></div>');
+      $("#preview").hide();
+      $("#predict").prop("disabled", true);
+
+      var postdata = {};
+      postdata["diagnosis"] = "CD";
+      postdata["patientData"] = dataarray;
+      postdatastring = JSON.stringify(postdata);
+
+      var url = "http://134.209.169.96:81/predict";
+
+      var posting = $.post(url, postdatastring);
+      posting.done(function (data) {
+        var content = $(data)[0];
+        //console.log(content);
+        //$("#result").empty().append( JSON.stringify(content) );
+
+        var results = JSON.parse(JSON.stringify($(data)));
+
+
+          var restable = document.createElement("table");
+
+          var header = restable.createTHead();
+          var row = header.insertRow(0);
+          var cell = row.insertCell(0);
+          cell.innerHTML = "No.";
+          var cell = row.insertCell(1);
+          cell.innerHTML = "<b>Charge</b>";
+          var cell = row.insertCell(2);
+          cell.innerHTML = "<b>Discharge</b>";
+          var cell = row.insertCell(3);
+          cell.innerHTML = "<b>Steroids</b>";
+
+          //emptying the array for chart data
+          chargephat = [];
+          dischargephat = [];
+          stphat = [];
+          
+          for (var i = 0; i < results.length; i++) {
+            result = results[i];
+            var row = restable.insertRow(-1);
+            var cell = row.insertCell(-1);
+            cell.innerHTML = i+1;
+            var cell = row.insertCell(-1);
+            cell.innerHTML = "<h5 class='text-primary'>" + roundUp(result.predictions.charge.phat, 2) + "% <br></h5><h6>" + roundUp(result.predictions.charge.ci, 2) + "%CI <small>(" + roundUp(result.predictions.charge.lb, 2) + "%," + roundUp(result.predictions.charge.ub, 2) + "%)</small></h6>";
+            var cell = row.insertCell(-1);
+            cell.innerHTML = "<h5 class='text-primary'>" + roundUp(result.predictions.discharge.phat, 2) + "% <br></h5><h6>" + roundUp(result.predictions.discharge.ci, 2) + "%CI <small>(" + roundUp(result.predictions.discharge.lb, 2) + "%," + roundUp(result.predictions.discharge.ub, 2) + "%)</small></h6>";
+            var cell = row.insertCell(-1);
+            cell.innerHTML = "<h5 class='text-primary'>" + roundUp(result.predictions.steroids.phat, 2) + "% <br></h5><h6>" + roundUp(result.predictions.steroids.ci, 2) + "%CI <small>(" + roundUp(result.predictions.steroids.lb, 2) + "%," + roundUp(result.predictions.steroids.ub, 2) + "%)</small></h6>";
+            // filling chart data
+            chargephat.push( roundUp(result.predictions.charge.phat,2) );
+            dischargephat.push( roundUp(result.predictions.discharge.phat,2) );
+            stphat.push( roundUp(result.predictions.steroids.phat,2) );
+
+          }
+          var chartdata = {};
+          chartdata.datasets = [];
+          chartdata.labels = [];
+          
+
+
+          // definign the single chart for different enteties:
+
+          //Charge
+          chartdata.datasets.push({});
+          ch_dataset = chartdata.datasets[0];
+          ch_dataset.label= "Charge";
+          ch_dataset.borderColor = "rgba(0, 123, 255,0.8)";
+          ch_dataset.backgroundColor = "rgba(0, 123, 255,0.1)";
+
+          //discharge
+          chartdata.datasets.push({});
+          dis_dataset = chartdata.datasets[1];
+          dis_dataset.label= "Disharge";
+          dis_dataset.borderColor = "rgba(40, 167, 69,0.8)";
+          dis_dataset.backgroundColor = "rgba(40, 167, 69,0.1)";
+
+          //steriods
+          chartdata.datasets.push({});
+          st_dataset = chartdata.datasets[2];
+          st_dataset.label= "Steroids";
+          st_dataset.borderColor = "rgba(255, 193, 7,0.8)";
+          st_dataset.backgroundColor = "rgba(255, 193, 7,0.1)";
+
+
+
+          
+          // assigning the chart data for chart generation
+          chartdata.datasets[0].data = chargephat;
+          chartdata.datasets[1].data = dischargephat;
+          chartdata.datasets[2].data = stphat;
+
+
+          chartdata.labels = Array.from({length: chargephat.length}, (_, i) => i + 1)
+
+          var result = document.getElementById("result");
+          result.innerHTML = "";
+
+          ctx = document.getElementById('Chart1').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartdata
+          })
+          $("#Chart1").show();
+          result.appendChild(restable);
+
+          $("#result_text").text("Results");
+          $("table").addClass("table");
+          //$('#results').show();
+
+        }).fail(function() {
+        $("#result_text").text("Something went wrong!!! Please try again.");
+          $('#result').html('<div id="overlay"><img style="width: 30px; top: -10px; left: 48%;" src="error.png" class="loading_circle" alt="loading" /></div>');
+      });
+
+
+
+
+
+    }
+
+    // $body = $("body");
+    // $(document).on({
+    //   ajaxStart: function () { $body.addClass("loading"); },
+    //   ajaxStop: function () { $body.removeClass("loading"); }
+    // });
+
+  </script>
+
+
+
+
+
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">IBD Risk</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Guidelines</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center text-center my-2">
+
+      <div class="col-lg-12">
+        <h1 class="font-weight-light">IBD Risk Calculator</h1>
+        <p>Please upload a valid CSV file using <a href="#">these guidelines</a> and click Next</p>
+        <input type="file" id="fileUpload" />
+        <input type="button" class="btn btn-primary" id="upload" value="Upload" onclick="Upload()" />
+        <!-- <a class="btn btn-primary" href="#">Call to Action!</a> -->
+      </div>
+
+
+
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div id="preview" class="card text-white my-2 py-2 text-center" style="overflow: scroll;">
+      <div class="card-body">
+        <p class="text-secondary">Raw Data Preview</p>
+        <div id="dvCSV"></div>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="col-lg-12 align-items-center text-center my-2">
+      <input type="button" class="btn btn-success active" id="predict" value="Next" disabled onclick="getresults();" />
+      <input type="button" class="btn btn-danger active" id="reset" value="Reset" onclick="location.reload();" />
+    </div>
+
+    
+    <div id="results" style="display:none;max-height: 600px; overflow: scroll; border: 2px solid #c1c1c1;"
+      class="card text-white my-2 py-2 text-center">
+      <div class="card-body">
+        <p id="result_text" class="text-secondary">Results</p>
+        <canvas id="Chart1" height="100" width="200"></canvas>
+        <div id="result"></div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <div class="fixed-bottom">
+    <footer class="py-1 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  </div>
+
+  <div class="modal">
+    <!-- Place at bottom of page -->
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
